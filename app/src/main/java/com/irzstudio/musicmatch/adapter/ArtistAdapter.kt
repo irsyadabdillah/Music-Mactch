@@ -6,16 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.irzstudio.musicmatch.R
 import com.irzstudio.musicmatch.dataartist.ArtistDetailResponse
+import com.irzstudio.musicmatch.dataartist.ArtistListResponse
+import com.irzstudio.musicmatch.dataartist.ArtistResponse
 import kotlinx.android.synthetic.main.item_listofartist.view.*
 
-class ArtistAdapter(private val list: ArrayList<ArtistDetailResponse>) :
+class ArtistAdapter(private val list: ArrayList<ArtistListResponse>) :
     RecyclerView.Adapter<ArtistAdapter.ArtistDetailViewHolder>() {
     inner class ArtistDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(artistDetailResponse: ArtistDetailResponse) {
+        fun bind(artistListResponse: ArtistListResponse) {
 
-            itemView.tv_nameartist.text = artistDetailResponse.artist_name
-            itemView.tv_idartist.text = artistDetailResponse.artist_id.toString()
-            itemView.tv_countryartist.text = artistDetailResponse.artist_country
+
+            itemView.tv_nameartist.text = artistListResponse.artist.artist_name
+            itemView.tv_idartist.text = artistListResponse.artist.artist_id.toString()
+            itemView.tv_countryartist.text = artistListResponse.artist.artist_country
 
 
             if (adapterPosition % 2 == 0){
