@@ -1,6 +1,5 @@
 package com.irzstudio.musicmatch
 
-import com.irzstudio.musicmatch.dataartist.ArtistDetailResponse
 import com.irzstudio.musicmatch.dataartist.ArtistResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -10,7 +9,7 @@ interface Api {
     @GET("artist.search")
     fun getArtist(
         @Query("q_artist") q_artist: String,
-        @Query("page_size") page_size: Int,
+        @Query("page_size") page_size: String?,
         @Query("apikey") apikey: String
     ): Call<ArtistResponse>
 
