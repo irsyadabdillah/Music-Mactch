@@ -8,10 +8,18 @@
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
+
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_nameartist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_toolbar" />
+
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_song"

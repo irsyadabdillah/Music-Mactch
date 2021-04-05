@@ -14,7 +14,7 @@
         android:theme="@style/Theme.MusicMatch"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".activity.ListOfSongActivity" >
+        <activity android:name=".activity.SongActivity" >
         </activity>
         <activity android:name=".activity.MainActivity" >
             <intent-filter>

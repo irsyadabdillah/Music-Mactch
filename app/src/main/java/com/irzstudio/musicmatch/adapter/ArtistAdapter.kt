@@ -5,16 +5,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.irzstudio.musicmatch.R
+import com.irzstudio.musicmatch.`interface`.OnListener
 import com.irzstudio.musicmatch.dataartist.ArtistDetailResponse
 import com.irzstudio.musicmatch.dataartist.ArtistListResponse
 import com.irzstudio.musicmatch.dataartist.ArtistResponse
+import com.irzstudio.musicmatch.datasong.TrackResponse
 import kotlinx.android.synthetic.main.item_listofartist.view.*
 
 class ArtistAdapter(private val list: ArrayList<ArtistListResponse>) :
     RecyclerView.Adapter<ArtistAdapter.ArtistDetailViewHolder>() {
+
+    var onClickListener: OnListener? = null
+
     inner class ArtistDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(artistListResponse: ArtistListResponse) {
 
+            itemView.setOnClickListener{
+                onClickListener?.onClick(artistListResponse)
+            }
 
             itemView.tv_nameartist.text = artistListResponse.artist.artist_name
             itemView.tv_idartist.text = artistListResponse.artist.artist_id.toString()

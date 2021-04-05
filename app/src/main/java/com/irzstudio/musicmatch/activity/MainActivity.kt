@@ -1,11 +1,13 @@
 package com.irzstudio.musicmatch.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.irzstudio.musicmatch.R
 import com.irzstudio.musicmatch.RetrofitClient
+import com.irzstudio.musicmatch.`interface`.OnListener
 import com.irzstudio.musicmatch.adapter.ArtistAdapter
 import com.irzstudio.musicmatch.dataartist.ArtistListResponse
 import com.irzstudio.musicmatch.dataartist.ArtistResponse
@@ -35,7 +37,6 @@ class MainActivity : AppCompatActivity() {
                 RetrofitClient.instance.getArtist(newText.orEmpty(), newText.orEmpty(), "fb27cdfa3c1941cce60f4df031296d10")
                     .enqueue(object : Callback<ArtistResponse> {
 
-
                         override fun onResponse(
                             call: Call<ArtistResponse>,
                             response: Response<ArtistResponse>) {
@@ -46,6 +47,15 @@ class MainActivity : AppCompatActivity() {
                             rv_artist.setHasFixedSize(true)
                             rv_artist.adapter = adapter
                             rv_artist.layoutManager = LinearLayoutManager(this@MainActivity )
+
+                            adapter.onClickListener = object : OnListener {
+                                override fun onClick(artistListResponse: ArtistListResponse) {
+                                    val intent = Intent(applicationContext, SongActivity::class.java)
+                                    intent.putExtra("idartist", artistListResponse.artist.artist_id )
+                                    intent.putExtra("artistname", artistListResponse.artist.artist_name)
+                                    startActivity(intent)
+                                }
+                            }
                         }
 
                         override fun onFailure(call: Call<ArtistResponse>, t: Throwable) {
@@ -54,13 +64,10 @@ class MainActivity : AppCompatActivity() {
                         }
 
                     })
-                return true
+                return false
             }
 
         })
-
-
-
 
 
     }

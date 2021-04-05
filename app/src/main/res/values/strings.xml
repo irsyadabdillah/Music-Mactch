@@ -2,5 +2,9 @@
     <string name="app_name">MusicMatch</string>
     <string name="search">Search</string>
     <string name="nama_artis">Nama Artis</string>
-    <string name="song">song</string>
+    <string name="song">Song</string>
+    <string name="_1">1</string>
+    <string name="garis_miring">/</string>
+    <string name="name_track">Name Track</string>
+    <string name="name_album">Name Album</string>
 </resources>
