@@ -20,12 +20,12 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: ArtistAdapter
-    private val list = ArrayList<ArtistListResponse>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initView()
+        setList()
 
     }
 
@@ -42,6 +42,18 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun setList(){
+        adapter = ArtistAdapter()
+        rv_artist.setHasFixedSize(true)
+        rv_artist.adapter = adapter
+        rv_artist.layoutManager = LinearLayoutManager(this@MainActivity )
+        adapter.onClickListener = object : OnListener {
+            override fun onClick(artistListResponse: ArtistListResponse) {
+                navigationToSong(artistListResponse)
+            }
+        }
     }
 
     private fun requestArtistQuery(newText: String?){
@@ -61,19 +73,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onDataLoad(response: Response<ArtistResponse>){
-        list.clear()
-        list.addAll(response.body()!!.message.body.artist_list)
-
-        adapter = ArtistAdapter(list)
-        rv_artist.setHasFixedSize(true)
-        rv_artist.adapter = adapter
-        rv_artist.layoutManager = LinearLayoutManager(this@MainActivity )
-
-        adapter.onClickListener = object : OnListener {
-            override fun onClick(artistListResponse: ArtistListResponse) {
-                navigationToSong(artistListResponse)
-            }
-        }
+        adapter.setData(response.body()!!.message.body.artist_list)
     }
 
     private fun navigationToSong(artistListResponse : ArtistListResponse){

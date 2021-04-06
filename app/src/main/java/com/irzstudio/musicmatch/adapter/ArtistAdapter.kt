@@ -12,8 +12,8 @@ import com.irzstudio.musicmatch.dataartist.ArtistResponse
 import com.irzstudio.musicmatch.datasong.TrackResponse
 import kotlinx.android.synthetic.main.item_listofartist.view.*
 
-class ArtistAdapter(private val list: ArrayList<ArtistListResponse>) :
-    RecyclerView.Adapter<ArtistAdapter.ArtistDetailViewHolder>() {
+class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ArtistDetailViewHolder>() {
+    private val list: MutableList<ArtistListResponse> = mutableListOf()
 
     var onClickListener: OnListener? = null
 
@@ -52,5 +52,11 @@ class ArtistAdapter(private val list: ArrayList<ArtistListResponse>) :
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    fun setData(newData: List<ArtistListResponse>){
+        list.clear()
+        list.addAll(newData)
+        notifyDataSetChanged()//menampilkan data yg baru ke user
     }
 }
